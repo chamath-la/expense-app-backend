@@ -22,6 +22,7 @@ class addExpensesRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'date'=>'required|string',
             'description'=>'required|string',
             'amount'=>'required|numeric',
             "status"=>'required|integer'

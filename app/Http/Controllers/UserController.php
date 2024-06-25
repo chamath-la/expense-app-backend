@@ -19,6 +19,8 @@ class UserController extends Controller
             if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
                 $user = User::where('username',$request->username)->first();
                 $token= $user->createToken('token')->plainTextToken;
+            }else{
+                throw new Exception('crentials not correct');
             }
 
 
@@ -26,7 +28,7 @@ class UserController extends Controller
 
         }catch(Exception $e){
 
-            return response()->json(['success'=>false,'status'=>500,'message'=>$e]);
+            return response()->json(['success'=>false,'status'=>500,'message'=>'Check your Username and Password']);
         }
 
     }
