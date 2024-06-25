@@ -43,6 +43,7 @@ class ExpenseController extends Controller
     {
         try{
             $expesnes=Expense::create([
+                'date'=>$request->date,
                 'description'=>$request->description,
                 'user_id'=>Auth::user()->id,
                 'amount'=>$request->amount,
