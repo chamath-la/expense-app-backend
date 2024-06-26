@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRegisterRequest;
-use userFacade;
+use userService;
 
 class UserController extends Controller
 {
     public function login(AuthRequest $request)
     {
-        userFacade::login($request);
+        userService::login($request);
 
     }
 
