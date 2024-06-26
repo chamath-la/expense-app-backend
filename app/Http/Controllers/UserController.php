@@ -9,27 +9,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRegisterRequest;
+use userFacade;
 
 class UserController extends Controller
 {
     public function login(AuthRequest $request)
     {
-        try{
-
-            if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
-                $user = User::where('username',$request->username)->first();
-                $token= $user->createToken('token')->plainTextToken;
-            }else{
-                throw new Exception('crentials not correct');
-            }
-
-
-            return response()->json(['success'=>true,'status'=>200,'data'=>$token]);
-
-        }catch(Exception $e){
-
-            return response()->json(['success'=>false,'status'=>500,'message'=>'Check your Username and Password']);
-        }
+        userFacade::login($request);
 
     }
 
