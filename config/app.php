@@ -183,7 +183,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'userFacade' => UserFacade::class,
+        'userService' => UserFacade::class,
     ])->toArray(),
 
 ];
