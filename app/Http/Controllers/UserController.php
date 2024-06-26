@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function login(AuthRequest $request)
     {
-        userService::login($request);
+        return userService::login($request);
 
     }
 
