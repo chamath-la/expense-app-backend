@@ -16,7 +16,7 @@ class ExpenseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(){ return expenses::show(); }
+    public function index(){ return expenses::all(); }
 
     /**
      * Show the form for creating a new resource.
@@ -29,50 +29,12 @@ class ExpenseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(addExpensesRequest $request)
-    {
-        try{
-            $expesnes=Expense::create([
-                'date'=>$request->date,
-                'description'=>$request->description,
-                'user_id'=>Auth::user()->id,
-                'amount'=>$request->amount,
-                'status'=>$request->status,
-            ]);
-
-            if(!$expesnes){
-                throw new Exception('error expenses not added');
-            }
-
-            return response()->json(['success'=>true,'status'=>200,'message'=>'Expense added']);
-
-        }catch(Exception $e){
-
-            return response()->json(['success'=>false,'status'=>500,'message'=>$e->getMessage()]);
-        }
-
-
-
-    }
+    public function store(addExpensesRequest $request){ return expenses::insert($request);}
 
     /**
      * Display the specified resource.
      */
-    public function show(Expense $expense)
-    {
-        try{
-
-            if(!$expense){
-                throw new Exception('No expenses for show');
-            }
-
-            return response()->json(['success'=>true,'status'=>200,'data'=> new ExpenseResource($expense)]);
-
-        }catch(Exception $e){
-
-            return response()->json(['success'=>false,'status'=>500,'message'=>$e->getMessage()]);
-        }
-    }
+    public function show(Expense $expense){ return expenses::show($expense); }
 
     /**
      * Show the form for editing the specified resource.
@@ -85,45 +47,10 @@ class ExpenseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Expense $expense)
-    {
-        try{
-            $expenses = Expense::find($expense->id);
-            $expenses->description = $request->description;
-            $expenses->amount = $request->amount;
-            $expenses->status = $request->status;
-            $expenses->update();
-
-
-            if(!$expenses){
-                throw new Exception('error expenses not updated');
-            }
-
-            return response()->json(['success'=>true,'status'=>200,'message'=>'Expenses updated']);
-
-        }catch(Exception $e){
-
-            return response()->json(['success'=>false,'status'=>500,'message'=>$e->getMessage()]);
-        }
-    }
+    public function update(Request $request, Expense $expense){ return expenses::update($request,$expense);}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Expense $expense)
-    {
-        try{
-            $expenses = Expense::destroy($expense->id);
-
-            if(!$expenses){
-                throw new Exception('error expenses not deleted');
-            }
-
-            return response()->json(['success'=>true,'status'=>200,'message'=>'Expenses deleted']);
-
-        }catch(Exception $e){
-
-            return response()->json(['success'=>false,'status'=>500,'message'=>$e->getMessage()]);
-        }
-    }
+    public function destroy(Expense $expense){ return expenses::delete($expense);}
 }
