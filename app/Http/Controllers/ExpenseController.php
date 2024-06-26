@@ -9,24 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ExpenseResource;
 use App\Http\Requests\addExpensesRequest;
 use App\Http\Resources\ExpenseCollection;
+use expenses;
 
 class ExpenseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        try{
-            $expenses = Expense::where('user_id',Auth::user()->id)->get();
-
-            return response()->json(['success'=>true,'status'=>200,'data'=> new ExpenseCollection($expenses)]);
-
-        }catch(Exception $e){
-
-            return response()->json(['success'=>false,'status'=>500,'message'=>$e->getMessage()]);
-        }
-    }
+    public function index(){ return expenses::show(); }
 
     /**
      * Show the form for creating a new resource.

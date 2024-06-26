@@ -1,6 +1,7 @@
 <?php
 
 use App\Facades\UserFacade;
+use App\Facades\ExpenseFacade;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -184,6 +185,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'userService' => UserFacade::class,
+        'expenses'=> ExpenseFacade::class,
     ])->toArray(),
 
 ];

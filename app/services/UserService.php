@@ -27,4 +27,28 @@ class UserService{
             return errorMessage('Check your Username and Password');
         }
     }
+
+    public function register($request)
+    {
+        try{
+            $register = User::create([
+                'name'=>$request->name,
+                'username'=>$request->username,
+                'password'=>$request->password,
+                'email'=>$request->email
+            ]);
+
+            return successMessage('User registered');
+
+        }catch(Exception $e){
+
+            return errorMessage($e);
+        }
+    }
+
+    public function logout($request)
+    {
+        $request->user()->tokens()->delete();
+        return response()->json(['success'=>true,'status'=>200,'message'=>'User logout']);
+    }
 }
