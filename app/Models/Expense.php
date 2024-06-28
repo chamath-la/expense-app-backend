@@ -15,7 +15,8 @@ class Expense extends Model
         'user_id',
         'description',
         'amount',
-        'status'
+        'status',
+        'name'
     ];
 
     /**

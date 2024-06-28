@@ -28,6 +28,7 @@ class ExpensesService{
     {
         try{
             $expesnes=Expense::create([
+                'name'=>$request->name,
                 'date'=>$request->date,
                 'description'=>$request->description,
                 'user_id'=>Auth::user()->id,
