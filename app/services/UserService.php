@@ -31,7 +31,7 @@ class UserService{
     public function register($request)
     {
         try{
-            User::create([
+            $register = User::create([
                 'name'=>$request->name,
                 'username'=>$request->username,
                 'password'=>$request->password,
